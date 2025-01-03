@@ -51,13 +51,24 @@ export default function Index() {
   const onAddSticker = () => {
     setIsModalVisible(true);
   };
-  const onSaveImageAsync = () => {
-    //
+  const onSaveImageAsync = async () => {
+    try {
+      const localUri = await captureRef(imageRef, {
+        height: 440,
+        quality: 1,
+      });
+      await MediaLibrary.saveToLibraryAsync(localUri);
+      if (localUri) {
+        alert('Image saved to gallery!');
+      }
+    } catch (error) {
+      console.error('Failed to save image to gallery:', error);
+    }
   };
 
   return (
     <View style={styles.container}>
-      <View ref={imageRef} style={styles.imageContainer}>
+      <View ref={imageRef} collapsable={false} style={styles.imageContainer}>
         <ImageViewer imgSource={selectedImage || PlaceholderImage} />
         {pickedEmoji && (
           <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />
