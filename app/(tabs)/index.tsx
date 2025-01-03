@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import ImageViewer from '@/components/ImageViewer';
 import Button from '@/components/Button';
 import IconButton from '@/components/IconButton';
@@ -8,6 +8,7 @@ import EmojiList from '@/components/EmojiList';
 import EmojiSticker from '@/components/EmojiSticker';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
+import domtoimage from 'dom-to-image';
 import { captureRef } from 'react-native-view-shot';
 import { useState, useEffect, useRef } from 'react';
 
@@ -52,18 +53,34 @@ export default function Index() {
     setIsModalVisible(true);
   };
   const onSaveImageAsync = async () => {
-    try {
-      const localUri = await captureRef(imageRef, {
-        height: 440,
-        quality: 1,
-      });
-      await MediaLibrary.saveToLibraryAsync(localUri);
-      if (localUri) {
-        alert('Image saved to gallery!');
+    if (Platform.OS === 'web') {
+      try {
+        // @ts-ignore
+        const dataUrl = await domtoimage.toJpeg(imageRef.current, {
+          height: 440,
+          width: 320,
+          quality: 0.95,
+        });
+        let link = document.createElement('a');
+        link.download = 'sticker-smash.jpeg';
+        link.href = dataUrl;
+        link.click();
+      } catch (error) {
+        console.error('Failed to save image to gallery:', error);
       }
-    } catch (error) {
-      console.error('Failed to save image to gallery:', error);
-    }
+    } else
+      try {
+        const localUri = await captureRef(imageRef, {
+          height: 440,
+          quality: 1,
+        });
+        await MediaLibrary.saveToLibraryAsync(localUri);
+        if (localUri) {
+          alert('Image saved to gallery!');
+        }
+      } catch (error) {
+        console.error('Failed to save image to gallery:', error);
+      }
   };
 
   return (
