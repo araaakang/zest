@@ -2,7 +2,20 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
 const Glogo = require('@/assets/images/glogo.webp');
 
+const webClientId =
+  '472681009553-sssviq8g9trsptv0hrciq2t46hodm4q0.apps.googleusercontent.com';
+const iosClientId =
+  '472681009553-gdq9kb4dvo6dkcqlckketcm44bk9d47h.apps.googleusercontent.com';
+const androidClientId =
+  '472681009553-d55ts0ei4f2vc6na0q6c5d0h23cjl0it.apps.googleusercontent.com';
+
 export default function LoginWithGoogle() {
+  const config = {
+    webClientId,
+    iosClientId,
+    androidClientId,
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
