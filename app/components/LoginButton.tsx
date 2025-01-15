@@ -19,7 +19,7 @@ const config = {
 WebBrowser.maybeCompleteAuthSession();
 
 export default function LoginWithGoogle() {
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn, setUserData } = useAuth();
   const [_, response, promptAsync] = Google.useAuthRequest(config);
   const getUserProfile = async (token: any) => {
     if (!token) return;
@@ -37,7 +37,8 @@ export default function LoginWithGoogle() {
         name: user.name,
         picture: user.picture,
       };
-      console.log(userData);
+      setUserData(userData);
+      setIsLoggedIn(true);
     } catch (err) {
       console.error(err);
     }
