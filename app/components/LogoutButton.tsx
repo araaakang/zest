@@ -29,7 +29,8 @@ export default function LogoutButton() {
       size={24}
       color="#fff"
       onPress={handleLogout}
-      style={{ marginRight: 20 }}
+      className='mr-5'
     />
   );
 }
+

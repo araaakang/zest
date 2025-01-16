@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container {
+  @apply flex-1 bg-primary;
+}
+.container-center {
+  @apply flex-1 bg-primary justify-center items-center;
+}
+.title-text {
+  @apply text-3xl font-bold leading-relaxed text-white;
+}
+.normal-text {
+  @apply text-base font-medium text-white;
+}
+.icon-button {
+  @apply flex-row gap-2 items-center bg-black p-4 rounded-lg;
+}
