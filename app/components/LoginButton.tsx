@@ -1,7 +1,6 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { useEffect } from 'react';
 import { Image } from 'expo-image';
-import { globalStyles } from '@/app/global-style';
 import { useAuth } from '@/app/auth/AuthContext';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
@@ -58,16 +57,16 @@ export default function LoginWithGoogle() {
   }, [response]);
 
   return (
-    <View>
+    <>
       <TouchableOpacity
-        style={globalStyles.IconButton}
+        className="icon-button"
         onPress={() => {
           promptAsync();
         }}
       >
-        <Image source={Glogo} style={{ width: 24, height: 24 }} />
-        <Text style={globalStyles.normalText}>Sign in with Google</Text>
+        <Image source={Glogo} style={{ width: 20, height: 20 }} />
+        <Text className="normal-text">Sign in with Google</Text>
       </TouchableOpacity>
-    </View>
+    </>
   );
 }

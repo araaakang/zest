@@ -2,6 +2,7 @@ import { Stack, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { AuthProvider, useAuth } from '@/app/auth/AuthContext';
+import "@/global.css";
 
 export default function RootLayout() {
   return (

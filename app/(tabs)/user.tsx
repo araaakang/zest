@@ -1,30 +1,19 @@
 import { ScrollView, View, Text, Image } from 'react-native';
-import { globalStyles } from '@/app/global-style';
 import { useAuth } from '@/app/auth/AuthContext';
 
 export default function UserScreen() {
   const { userData } = useAuth();
 
   return (
-    <ScrollView style={globalStyles.container}>
+    <ScrollView className="container">
       {userData && (
-        <View
-          style={{
-            padding: 20,
-            alignItems: 'center',
-          }}
-        >
+        <View className="px-5 py-10 items-center">
           <Image
             source={{ uri: userData.picture }}
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: 50,
-              marginBottom: 20,
-            }}
+            className="w-24 h-24 rounded-full mb-4"
           />
-          <Text style={globalStyles.titleText}>{userData.name}</Text>
-          <Text style={globalStyles.normalText}>{userData.email}</Text>
+          <Text className="title-text">{userData.name}</Text>
+          <Text className="normal-text">{userData.email}</Text>
         </View>
       )}
     </ScrollView>
